@@ -1,0 +1,15 @@
+package com.service.lazimu.enggine.configuration;
+
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+@org.springframework.context.annotation.Configuration
+@EnableWebMvc
+public class Configuration extends WebMvcConfigurerAdapter {
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**").allowedOrigins("*").allowedMethods("*").maxAge(3600);
+    }
+}
