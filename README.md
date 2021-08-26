@@ -1,5 +1,7 @@
 # lazimu-mds-be
 
-Memulai aplikasi pada tanggal 26 Agustus 2021. 
+Starting application on August 26, 2021
 
-Untuk pengembangan portofolio
+For portfolio development.
+
+- supported by Spring Boot
