@@ -19,7 +19,7 @@ public interface UserService {
 
     User login(String email, String password) throws ResourceNotFoundExceotion;
 
-    Map<String, Boolean> delete(String id) throws ResourceNotFoundExceotion;
+    Map<String, Boolean> delete(String accessToken, String id) throws ResourceNotFoundExceotion;
 
     TokenAcces requestChangePassword(String email) throws TemplateException, MessagingException, IOException, ResourceNotFoundExceotion;
 

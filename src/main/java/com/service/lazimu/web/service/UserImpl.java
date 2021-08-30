@@ -54,7 +54,10 @@ public class UserImpl implements UserService {
     }
 
     @Override
-    public Map<String, Boolean> delete(String id) throws ResourceNotFoundExceotion {
+    public Map<String, Boolean> delete(String accessToken, String id) throws ResourceNotFoundExceotion {
+        if (!accessToken.equals("LAZIMU")) {
+            throw new ResourceNotFoundExceotion(("Access Blocked"));
+        }
         var KJDI = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundExceotion("USER ID NOT FOUND"));
         userRepository.deleteById(KJDI.getId());
         Map<String, Boolean> response = new HashMap<>();
