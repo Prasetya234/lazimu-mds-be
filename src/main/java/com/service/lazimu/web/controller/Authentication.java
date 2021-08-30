@@ -3,6 +3,8 @@ package com.service.lazimu.web.controller;
 import com.service.lazimu.enggine.response.CommonResponse;
 import com.service.lazimu.enggine.response.CommonResponseGenerator;
 import com.service.lazimu.web.dto.UserDTO;
+import com.service.lazimu.web.model.ChangePassword;
+import com.service.lazimu.web.model.TokenAcces;
 import com.service.lazimu.web.model.User;
 import com.service.lazimu.web.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -38,6 +40,33 @@ public class Authentication {
     public ResponseEntity<CommonResponse<UserDTO>> login(@RequestHeader("email") String email, @RequestHeader("password") String password) {
         try {
             return commonResponseGenerator.successResponse(userService.login(email, password));
+        } catch (Exception e) {
+            return commonResponseGenerator.failResponse(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/change-password/request", method = RequestMethod.POST)
+    public ResponseEntity<CommonResponse<TokenAcces>> requestChangePassword(@RequestHeader("email")String email) {
+        try {
+            return commonResponseGenerator.successResponse(userService.requestChangePassword(email));
+        } catch (Exception e) {
+            return commonResponseGenerator.failResponse(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/change-password/valid-code", method = RequestMethod.GET)
+    public ResponseEntity<CommonResponse<TokenAcces>> validCode(@RequestParam("code") String code) {
+        try {
+            return commonResponseGenerator.successResponse(userService.validCode(code));
+        } catch (Exception e) {
+            return commonResponseGenerator.failResponse(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/change-password", method = RequestMethod.POST)
+    public ResponseEntity<CommonResponse<UserDTO>> changePassword(@RequestBody ChangePassword changePassword) {
+        try {
+            return commonResponseGenerator.successResponse(userService.changePassword(changePassword));
         } catch (Exception e) {
             return commonResponseGenerator.failResponse(e.getMessage());
         }
