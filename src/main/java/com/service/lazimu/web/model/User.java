@@ -1,8 +1,11 @@
 package com.service.lazimu.web.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "users")
@@ -19,6 +22,12 @@ public class User {
 
     @Column(name = "mobile_phone_number")
     private String mobilePhoneNumber;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Jakarta")
+    @Column(name = "create_date")
+    private Date createdDate;
 
     @Column(name = "email")
     private String emailAddress;
@@ -60,6 +69,14 @@ public class User {
         this.mobilePhoneNumber = mobilePhoneNumber;
     }
 
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
     public String getEmailAddress() {
         return emailAddress;
     }
@@ -82,6 +99,7 @@ public class User {
                 "id='" + id + '\'' +
                 ", username='" + username + '\'' +
                 ", mobilePhoneNumber='" + mobilePhoneNumber + '\'' +
+                ", createdDate=" + createdDate +
                 ", emailAddress='" + emailAddress + '\'' +
                 ", passwordHash='" + passwordHash + '\'' +
                 '}';
