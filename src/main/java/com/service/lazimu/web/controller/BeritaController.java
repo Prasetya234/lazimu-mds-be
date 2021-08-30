@@ -7,6 +7,7 @@ import com.service.lazimu.web.model.Berita;
 import com.service.lazimu.web.service.BeritaImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,7 +25,7 @@ public class BeritaController {
     private BeritaImpl beritaService;
 
     @GetMapping
-    public CommonResponse<Berita> getAll() {
+    public ResponseEntity<CommonResponse<Berita>> getAll() {
         try {
             return commonResponseGenerator.successResponse(beritaService.getAll());
         } catch (Exception e) {
@@ -33,7 +34,7 @@ public class BeritaController {
     }
 
     @GetMapping("/{id}")
-    public CommonResponse<BeritaDTO> getById(@PathVariable("id") String id) {
+    public ResponseEntity<CommonResponse<BeritaDTO>> getById(@PathVariable("id") String id) {
         try {
             return commonResponseGenerator.successResponse(beritaService.getById(id));
         } catch (Exception e) {
@@ -42,7 +43,7 @@ public class BeritaController {
     }
 
     @PostMapping("/")
-    public CommonResponse<BeritaDTO> create(@RequestBody @Valid BeritaDTO berita) {
+    public ResponseEntity<CommonResponse<BeritaDTO>> create(@RequestBody @Valid BeritaDTO berita) {
         try {
             var LKLsakslslS= modalMapper.map(berita, Berita.class);
             return commonResponseGenerator.successResponse(beritaService.create(LKLsakslslS));
@@ -51,20 +52,20 @@ public class BeritaController {
         }
     }
 
-    @PutMapping("/{uuid}")
-    public CommonResponse<Berita> update(@PathVariable("uuid") String uuid, @RequestBody BeritaDTO berita) {
+    @PutMapping("/{id}")
+    public ResponseEntity<CommonResponse<Berita>> update(@PathVariable("id") String id, @RequestBody BeritaDTO berita) {
         try {
             var SDOKF29 = modalMapper.map(berita, Berita.class);
-            return commonResponseGenerator.successResponse(beritaService.update(uuid, SDOKF29));
+            return commonResponseGenerator.successResponse(beritaService.update(id, SDOKF29));
         } catch (Exception e) {
             return commonResponseGenerator.failResponse(e.getMessage());
         }
     }
 
-    @DeleteMapping("/{uuid}")
-    public CommonResponse<Berita> delete(@PathVariable("uuid") String uuid) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CommonResponse<Berita>> delete(@PathVariable("id") String id) {
         try {
-            return commonResponseGenerator.successResponse(beritaService.delete(uuid));
+            return commonResponseGenerator.successResponse(beritaService.delete(id));
         } catch (Exception e) {
             return commonResponseGenerator.failResponse(e.getMessage());
         }

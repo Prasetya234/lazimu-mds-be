@@ -1,22 +1,29 @@
 package com.service.lazimu.enggine.response;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Component
 public class CommonResponseGenerator {
-    public <T> CommonResponse successResponse(T content) {
+    @ResponseStatus(value=HttpStatus.OK)
+    public <T> ResponseEntity<CommonResponse<T>> successResponse(Object content) {
         CommonResponse commonResponse = new CommonResponse<>();
         commonResponse.setStatus("200");
         commonResponse.setMessage("SUCCESS");
         commonResponse.setContent(content);
-        return commonResponse;
+        return new ResponseEntity<CommonResponse<T>>(commonResponse, HttpStatus.OK);
     }
 
-    public <T> CommonResponse<T> failResponse(String content) {
+    @ResponseStatus(value= HttpStatus.INTERNAL_SERVER_ERROR)
+    public <T> ResponseEntity<CommonResponse<T>> failResponse(String content) {
         CommonResponse commonResponse = new CommonResponse<>();
-        commonResponse.setStatus("200");
+        commonResponse.setStatus("500");
         commonResponse.setMessage("ERROR");
         commonResponse.setContent(content);
-        return commonResponse;
+        return new ResponseEntity<CommonResponse<T>>(commonResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

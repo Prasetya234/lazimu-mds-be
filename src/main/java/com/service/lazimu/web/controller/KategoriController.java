@@ -5,6 +5,7 @@ import com.service.lazimu.enggine.response.CommonResponseGenerator;
 import com.service.lazimu.web.model.Kategori;
 import com.service.lazimu.web.service.KategoriImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,7 +19,7 @@ public class KategoriController {
     private KategoriImpl kategoriService;
 
     @GetMapping
-    public CommonResponse<Kategori> getAll() {
+    public ResponseEntity<CommonResponse<Kategori>> getAll() {
         try {
             return commonResponseGenerator.successResponse(kategoriService.getAll());
         } catch (Exception e) {
@@ -27,7 +28,7 @@ public class KategoriController {
     }
 
     @PostMapping
-    public  CommonResponse<Kategori> create(@RequestBody Kategori kategori) {
+    public ResponseEntity<CommonResponse<Kategori>> create(@RequestBody Kategori kategori) {
         try {
             return commonResponseGenerator.successResponse(kategoriService.create(kategori));
         } catch (Exception e) {
@@ -36,7 +37,7 @@ public class KategoriController {
     }
 
     @PutMapping("/{id}")
-    public CommonResponse<Kategori> update(@PathVariable("id") String id, @RequestBody Kategori kategori) {
+    public ResponseEntity<CommonResponse<Kategori>> update(@PathVariable("id") String id, @RequestBody Kategori kategori) {
         try {
             return commonResponseGenerator.successResponse(kategoriService.update(id, kategori));
         } catch (Exception e) {
@@ -45,7 +46,7 @@ public class KategoriController {
     }
 
     @DeleteMapping("/{id}")
-    public CommonResponse<Kategori> delete(@PathVariable("id") String id) {
+    public ResponseEntity<CommonResponse<Kategori>> delete(@PathVariable("id") String id) {
         try {
             return commonResponseGenerator.successResponse(kategoriService.delete(id));
         } catch (Exception e) {

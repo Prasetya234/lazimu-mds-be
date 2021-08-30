@@ -7,6 +7,7 @@ import com.service.lazimu.web.model.User;
 import com.service.lazimu.web.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,7 +25,7 @@ public class Authentication {
     private UserService userService;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public CommonResponse<UserDTO> register(@RequestBody @Valid UserDTO userDTO) {
+    public ResponseEntity<CommonResponse<UserDTO>> register(@RequestBody @Valid UserDTO userDTO) {
         try {
             User user = modelMapper.map(userDTO, User.class);
             return commonResponseGenerator.successResponse(userService.register(user));
@@ -33,8 +34,8 @@ public class Authentication {
         }
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public CommonResponse<UserDTO> login(@RequestHeader("email") String email, @RequestHeader("password") String password) {
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResponseEntity<CommonResponse<UserDTO>> login(@RequestHeader("email") String email, @RequestHeader("password") String password) {
         try {
             return commonResponseGenerator.successResponse(userService.login(email, password));
         } catch (Exception e) {

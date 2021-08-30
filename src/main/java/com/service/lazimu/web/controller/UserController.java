@@ -5,6 +5,7 @@ import com.service.lazimu.enggine.response.CommonResponseGenerator;
 import com.service.lazimu.web.dto.UserDTO;
 import com.service.lazimu.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public CommonResponse<List<UserDTO>> getAll(@RequestHeader("access") String access) {
+    public ResponseEntity<CommonResponse<List<UserDTO>>> getAll(@RequestHeader("access") String access) {
         try {
          return  commonResponseGenerator.successResponse(userService.getAll(access));
         } catch (Exception e) {
