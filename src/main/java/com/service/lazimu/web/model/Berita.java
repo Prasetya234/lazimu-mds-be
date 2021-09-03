@@ -38,13 +38,11 @@ public class Berita {
     @Lob
     @Type(type = "org.hibernate.type.TextType")
     @Column(name = "keterangan", nullable = false)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private String keterangan;
 
     @Lob
     @Type(type = "org.hibernate.type.TextType")
     @Column(name = "image", nullable = false)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private  String image;
 
     @Column(name = "kategori")
@@ -53,6 +51,7 @@ public class Berita {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "kategori_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Kategori kategoriId;
 
     public Berita() {
