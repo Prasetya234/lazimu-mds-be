@@ -42,7 +42,7 @@ public class BeritaController {
         }
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<CommonResponse<BeritaDTO>> create(@RequestBody @Valid BeritaDTO berita) {
         try {
             var LKLsakslslS= modalMapper.map(berita, Berita.class);

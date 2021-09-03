@@ -1,6 +1,7 @@
 package com.service.lazimu.web.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -37,11 +38,13 @@ public class Berita {
     @Lob
     @Type(type = "org.hibernate.type.TextType")
     @Column(name = "keterangan", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private String keterangan;
 
     @Lob
     @Type(type = "org.hibernate.type.TextType")
     @Column(name = "image", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private  String image;
 
     @Column(name = "kategori")
