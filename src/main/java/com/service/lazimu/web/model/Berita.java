@@ -49,7 +49,7 @@ public class Berita {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String kategori;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "kategori_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Kategori kategoriId;
