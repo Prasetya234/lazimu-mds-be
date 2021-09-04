@@ -92,21 +92,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
-		<!--fast code-->
-		<dependencyManagement>
-			<dependencies>
-				<dependency>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-undertow</artifactId>
-					<exclusions>
-						<exclusion>
-							<groupId>org.springframework.boot</groupId>
-							<artifactId>spring-boot-starter-tomcat</artifactId>
-						</exclusion>
-					</exclusions>
-				</dependency>
-			</dependencies>
-		</dependencyManagement>
 	</dependencies>
 	<build>
 		<plugins>
