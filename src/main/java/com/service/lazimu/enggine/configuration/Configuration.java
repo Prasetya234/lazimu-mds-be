@@ -19,16 +19,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @org.springframework.context.annotation.Configuration
-@Import({
-        DispatcherServletAutoConfiguration.class,
-        ErrorMvcAutoConfiguration.class,
-        HttpEncodingAutoConfiguration.class,
-        HttpMessageConvertersAutoConfiguration.class,
-        JacksonAutoConfiguration.class,
-        PropertyPlaceholderAutoConfiguration.class,
-        ThymeleafAutoConfiguration.class,
-        WebMvcAutoConfiguration.class,
-})
 @EnableWebMvc
 public class Configuration extends WebMvcConfigurerAdapter {
 
