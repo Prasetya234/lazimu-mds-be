@@ -19,9 +19,6 @@ public class BeritaController {
     private CommonResponseGenerator commonResponseGenerator;
 
     @Autowired
-    private ModelMapper modalMapper;
-
-    @Autowired
     private BeritaImpl beritaService;
 
     @GetMapping
@@ -43,20 +40,9 @@ public class BeritaController {
     }
 
     @PostMapping
-    public ResponseEntity<CommonResponse<BeritaDTO>> create(@RequestBody @Valid BeritaDTO berita) {
+    public ResponseEntity<CommonResponse<Berita>> create(@RequestBody @Valid Berita berita) {
         try {
-            var LKLsakslslS= modalMapper.map(berita, Berita.class);
-            return commonResponseGenerator.successResponse(beritaService.create(LKLsakslslS));
-        } catch (Exception e) {
-            return commonResponseGenerator.failResponse(e.getMessage());
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<CommonResponse<Berita>> update(@PathVariable("id") String id, @RequestBody BeritaDTO berita) {
-        try {
-            var SDOKF29 = modalMapper.map(berita, Berita.class);
-            return commonResponseGenerator.successResponse(beritaService.update(id, SDOKF29));
+            return commonResponseGenerator.successResponse(beritaService.create(berita));
         } catch (Exception e) {
             return commonResponseGenerator.failResponse(e.getMessage());
         }

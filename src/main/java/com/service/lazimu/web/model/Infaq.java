@@ -1,46 +1,37 @@
 package com.service.lazimu.web.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
-@Table(name = "beritaes")
-public class Berita {
+@Table(name = "infaqes")
+public class Infaq {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "user_id", columnDefinition = "VARCHAR(255)", unique=true)
     private String id;
 
-    @Column(name = "judul", nullable = false)
+    @Column(name = "judul")
     private String judul;
-
-    @JsonSerialize
-    @JsonDeserialize
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    @Column(name = "create_date")
-    private Date createdDate;
-
-    @Column(name = "author", nullable = false)
-    private String author;
 
     @Lob
     @Type(type = "org.hibernate.type.TextType")
-    @Column(name = "image", nullable = false)
-    private  String image;
+    @Column(name = "image")
+    private String image;
 
-    @Column(name = "kategori")
+    @Column(name = "donasi")
+    private String donasi;
+
+    @Column(name = "donatur")
+    private String donatur;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Column(name = "kategori")
     private String kategori;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
@@ -48,18 +39,14 @@ public class Berita {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Kategori kategoriId;
 
-    @OneToMany(mappedBy = "berita", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Set<KeteranganBerita> keteranganBerita = new HashSet<>();
-
-    public Berita() {
+    public Infaq() {
     }
 
-    public Berita(String judul, Date createdDate, String author, String image, String kategori) {
+    public Infaq(String judul, String image, String donasi, String donatur, String kategori) {
         this.judul = judul;
-        this.createdDate = createdDate;
-        this.author = author;
         this.image = image;
+        this.donasi = donasi;
+        this.donatur = donatur;
         this.kategori = kategori;
     }
 
@@ -79,28 +66,28 @@ public class Berita {
         this.judul = judul;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getDonasi() {
+        return donasi;
+    }
+
+    public void setDonasi(String donasi) {
+        this.donasi = donasi;
+    }
+
+    public String getDonatur() {
+        return donatur;
+    }
+
+    public void setDonatur(String donatur) {
+        this.donatur = donatur;
     }
 
     public String getKategori() {
@@ -119,26 +106,14 @@ public class Berita {
         this.kategoriId = kategoriId;
     }
 
-    public Set<KeteranganBerita> getKeteranganBerita() {
-        return keteranganBerita;
-    }
-
-    public void setKeteranganBerita(Set<KeteranganBerita> keteranganBerita) {
-        this.keteranganBerita = keteranganBerita;
-
-        for (KeteranganBerita a: keteranganBerita) {
-            a.setBerita(this);
-        }
-    }
-
     @Override
     public String toString() {
-        return "Berita{" +
+        return "Infaq{" +
                 "id='" + id + '\'' +
                 ", judul='" + judul + '\'' +
-                ", createdDate=" + createdDate +
-                ", author='" + author + '\'' +
                 ", image='" + image + '\'' +
+                ", donasi='" + donasi + '\'' +
+                ", donatur='" + donatur + '\'' +
                 ", kategori='" + kategori + '\'' +
                 ", kategoriId=" + kategoriId +
                 '}';

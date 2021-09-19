@@ -13,7 +13,6 @@ public interface BeritaService {
 
     Berita create(Berita Berita) throws ResourceNotFoundExceotion;
 
-    Berita update(String id, Berita berita) throws ResourceNotFoundExceotion;
 
     Map<String,Boolean> delete(String id) throws ResourceNotFoundExceotion;
 }

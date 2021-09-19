@@ -1,12 +1,12 @@
 package com.service.lazimu.web.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.service.lazimu.web.model.KeteranganBerita;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.HashSet;
 
 public class BeritaDTO {
 
@@ -21,8 +21,7 @@ public class BeritaDTO {
     @NotBlank(message = "AUTHOR NOT NULL")
     private String author;
 
-    @NotBlank(message = "KETERANGAN NOT NULL")
-    private String keterangan;
+    private HashSet<KeteranganBerita> keteranganBerita;
 
     @NotBlank(message = "IMAGE NOT NULL")
     private String image;
@@ -54,12 +53,12 @@ public class BeritaDTO {
         this.author = author;
     }
 
-    public String getKeterangan() {
-        return keterangan;
+    public HashSet<KeteranganBerita> getKeteranganBerita() {
+        return keteranganBerita;
     }
 
-    public void setKeterangan(String keterangan) {
-        this.keterangan = keterangan;
+    public void setKeteranganBerita(HashSet<KeteranganBerita> keteranganBerita) {
+        this.keteranganBerita = keteranganBerita;
     }
 
     public String getImage() {

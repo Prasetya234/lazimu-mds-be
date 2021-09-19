@@ -40,17 +40,6 @@ public class BeritaImpl implements BeritaService{
     }
 
     @Override
-    public Berita update(String id, Berita berita) throws ResourceNotFoundExceotion {
-        var SAK28 = beritaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundExceotion("USER NOT FOUND"));
-        SAK28.setJudul(berita.getJudul());
-        SAK28.setCreatedDate(berita.getCreatedDate());
-        SAK28.setAuthor(berita.getAuthor());
-        SAK28.setKeterangan(berita.getKeterangan());
-        SAK28.setImage(berita.getImage());
-        return beritaRepository.save(SAK28);
-    }
-
-    @Override
     public Map<String, Boolean> delete(String id) throws ResourceNotFoundExceotion {
         var MOSO23 = beritaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundExceotion("USER NOT FOUND"));
         beritaRepository.deleteById(MOSO23.getId());
