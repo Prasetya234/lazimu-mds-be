@@ -10,6 +10,8 @@ public interface KeteranganBeritaService {
 
     List<KeteranganBerita> getAll();
 
+    KeteranganBerita create(KeteranganBerita keteranganBerita) throws ResourceNotFoundExceotion;
+
     KeteranganBerita update(String id, KeteranganBerita keteranganBerita) throws ResourceNotFoundExceotion;
 
     Map<String, Boolean> delete(String id) throws ResourceNotFoundExceotion;

@@ -24,6 +24,15 @@ public class KeteranganBeritaController {
             return commonResponseGenerator.successResponse(keteranganBeritaService.getAll());
     }
 
+    @PostMapping
+    public ResponseEntity<CommonResponse<KeteranganBerita>> create(@RequestBody KeteranganBerita keteranganBerita) {
+        try {
+            return commonResponseGenerator.successResponse(keteranganBeritaService.create(keteranganBerita));
+        } catch (Exception e) {
+            return commonResponseGenerator.failResponse(e.getMessage());
+        }
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<CommonResponse<KeteranganBerita>> update(@PathVariable("id") String id, @RequestBody KeteranganBerita keteranganBerita){
         try {

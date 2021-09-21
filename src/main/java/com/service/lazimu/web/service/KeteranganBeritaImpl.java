@@ -3,6 +3,7 @@ package com.service.lazimu.web.service;
 
 import com.service.lazimu.enggine.exception.ResourceNotFoundExceotion;
 import com.service.lazimu.web.model.KeteranganBerita;
+import com.service.lazimu.web.repository.BeritaRepository;
 import com.service.lazimu.web.repository.KeteranganBeritaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,15 +20,22 @@ public class KeteranganBeritaImpl implements KeteranganBeritaService {
     @Autowired
     private KeteranganBeritaRepository keteranganBeritaRepository;
 
+    @Autowired
+    private BeritaRepository beritaRepository;
+
     @Override
     public List<KeteranganBerita> getAll() {
         return keteranganBeritaRepository.findAll();
     }
 
     @Override
+    public KeteranganBerita create(KeteranganBerita keteranganBerita) throws ResourceNotFoundExceotion {
+        return keteranganBeritaRepository.save(keteranganBerita);
+    }
+
+    @Override
     public KeteranganBerita update(String id, KeteranganBerita keteranganBerita) throws ResourceNotFoundExceotion {
         var update = keteranganBeritaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundExceotion("ID NOT FOUND"));
-//        update.setKeterangan(keteranganBerita.getKeterangan());
         return keteranganBeritaRepository.save(update);
     }
 

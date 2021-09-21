@@ -1,6 +1,5 @@
 package com.service.lazimu.web.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
@@ -21,6 +20,9 @@ public class KeteranganBerita {
     @Type(type = "org.hibernate.type.TextType")
     @Column(name = "keterangan")
     private String keteranganBerita;
+
+    @Column(name = "sequence_number")
+    private String sequenceNumber;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, cascade =  CascadeType.MERGE)
@@ -47,6 +49,14 @@ public class KeteranganBerita {
         this.keteranganBerita = keteranganBerita;
     }
 
+    public String getSequenceNumber() {
+        return sequenceNumber;
+    }
+
+    public void setSequenceNumber(String sequenceNumber) {
+        this.sequenceNumber = sequenceNumber;
+    }
+
     public Berita getBerita() {
         return berita;
     }
@@ -60,6 +70,7 @@ public class KeteranganBerita {
         return "KeteranganBerita{" +
                 "id='" + id + '\'' +
                 ", keteranganBerita='" + keteranganBerita + '\'' +
+                ", sequenceNumber='" + sequenceNumber + '\'' +
                 '}';
     }
 }
