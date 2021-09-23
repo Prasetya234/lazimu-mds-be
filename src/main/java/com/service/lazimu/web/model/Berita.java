@@ -17,8 +17,8 @@ import java.util.Set;
 @Table(name = "beritaes")
 public class Berita {
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(name = "user_id", columnDefinition = "VARCHAR(255)", unique=true)
     private String id;
 
