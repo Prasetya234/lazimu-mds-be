@@ -27,6 +27,7 @@ public class Berita {
 
     @JsonSerialize
     @JsonDeserialize
+    @JsonFormat(pattern="yyyy-MM-dd")
     @Column(name = "create_date")
     private Date createdDate;
 
