@@ -9,9 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "beritaes")
@@ -50,7 +48,7 @@ public class Berita {
 
     @OneToMany(mappedBy = "berita", cascade = CascadeType.ALL)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Set<KeteranganBerita> keteranganBerita = new HashSet<>();
+    private List<KeteranganBerita> keteranganBerita = new ArrayList<>();
 
     public Berita() {
     }
@@ -119,16 +117,12 @@ public class Berita {
         this.kategoriId = kategoriId;
     }
 
-    public Set<KeteranganBerita> getKeteranganBerita() {
+    public List<KeteranganBerita> getKeteranganBerita() {
         return keteranganBerita;
     }
 
-    public void setKeteranganBerita(Set<KeteranganBerita> keteranganBerita) {
+    public void setKeteranganBerita(List<KeteranganBerita> keteranganBerita) {
         this.keteranganBerita = keteranganBerita;
-
-        for (KeteranganBerita a: keteranganBerita) {
-            a.setBerita(this);
-        }
     }
 
     @Override

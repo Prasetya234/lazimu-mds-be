@@ -2,12 +2,15 @@ package com.service.lazimu.web.service;
 
 import com.service.lazimu.enggine.exception.ResourceNotFoundExceotion;
 import com.service.lazimu.web.model.Berita;
+import com.service.lazimu.web.model.KeteranganBerita;
 import com.service.lazimu.web.repository.BeritaRepository;
 import com.service.lazimu.web.repository.KategoriRepository;
+import com.service.lazimu.web.repository.KeteranganBeritaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,16 +23,27 @@ public class BeritaImpl implements BeritaService{
     private BeritaRepository beritaRepository;
 
     @Autowired
+    private KeteranganBeritaRepository keteranganBeritaRepository;
+
+    @Autowired
     private KategoriRepository kategoriRepository;
 
     @Override
     public List<Berita> getAll() {
-        return beritaRepository.findAll();
+        List<Berita> list = beritaRepository.findAll();
+        List<Berita> res = new ArrayList<>();
+        for (Berita b: list) {
+            b.setKeteranganBerita(keteranganBeritaRepository.findAllByBeritaOrderBySequenceNumberAsc(b));
+            res.add(b);
+        }
+        return res;
     }
 
     @Override
     public Berita getById(String id) throws ResourceNotFoundExceotion {
-        return beritaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundExceotion("USER NOT FOUND"));
+        Berita berita = beritaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundExceotion("USER NOT FOUND"));
+        berita.setKeteranganBerita(keteranganBeritaRepository.findAllByBeritaOrderBySequenceNumberAsc(berita));
+        return berita;
     }
 
     @Override
