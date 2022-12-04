@@ -24,8 +24,8 @@ public class InfaqController {
     private CommonResponseGenerator commonResponseGenerator;
 
     @GetMapping
-    public ResponseEntity<CommonResponse<Infaq>> getAll() {
-        return commonResponseGenerator.successResponse(infaqService.getAll());
+    public ResponseEntity<CommonResponse<Infaq>> getAll(@RequestParam(value = "kategori", required = false) String category) {
+        return commonResponseGenerator.successResponse(infaqService.getAll(category));
     }
 
     @PostMapping

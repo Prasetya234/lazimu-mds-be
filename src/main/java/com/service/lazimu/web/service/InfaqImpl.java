@@ -2,6 +2,7 @@ package com.service.lazimu.web.service;
 
 import com.service.lazimu.enggine.exception.ResourceNotFoundExceotion;
 import com.service.lazimu.web.model.Infaq;
+import com.service.lazimu.web.model.Kategori;
 import com.service.lazimu.web.repository.InfaqRepository;
 import com.service.lazimu.web.repository.KategoriRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,18 @@ public class InfaqImpl implements InfaqService{
     private KategoriRepository kategoriRepository;
 
     @Override
-    public List<Infaq> getAll() {
+    public List<Infaq> getAll(String category) {
+        if (category != null) {
+            if (category.equals("sosial")) {
+                return infaqRepository.findAllByKategoriId(kategoriRepository.findById("8775cfa8-bbc0-47c0-a1b6-4056f1847094").get());
+            }
+            if (category.equals("ekonomi")) {
+                return infaqRepository.findAllByKategoriId(kategoriRepository.findById("3c47c324-75af-41a9-8587-7c1a5f92d4fc").get());
+            }
+            if (category.equals("pendidikan")) {
+                return infaqRepository.findAllByKategoriId(kategoriRepository.findById("0f928276-73a1-4b92-adc8-3cbecf4cd1b0").get());
+            }
+        }
         return infaqRepository.findAll();
     }
 

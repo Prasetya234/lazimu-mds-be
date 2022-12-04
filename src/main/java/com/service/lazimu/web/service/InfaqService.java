@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface InfaqService {
-    List<Infaq> getAll();
+    List<Infaq> getAll(String category);
 
     Infaq create(Infaq infaq) throws ResourceNotFoundExceotion;
 
