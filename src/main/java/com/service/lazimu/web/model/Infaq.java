@@ -30,7 +30,6 @@ public class Infaq {
     @Column(name = "donatur")
     private String donatur;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "kategori")
     private String kategori;
 

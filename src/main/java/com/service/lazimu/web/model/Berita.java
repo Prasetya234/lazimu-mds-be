@@ -38,17 +38,12 @@ public class Berita {
     private  String image;
 
     @Column(name = "kategori")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String kategori;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "kategori_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Kategori kategoriId;
-
-    @OneToMany(mappedBy = "berita", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private List<KeteranganBerita> keteranganBerita = new ArrayList<>();
 
     public Berita() {
     }
@@ -117,13 +112,6 @@ public class Berita {
         this.kategoriId = kategoriId;
     }
 
-    public List<KeteranganBerita> getKeteranganBerita() {
-        return keteranganBerita;
-    }
-
-    public void setKeteranganBerita(List<KeteranganBerita> keteranganBerita) {
-        this.keteranganBerita = keteranganBerita;
-    }
 
     @Override
     public String toString() {

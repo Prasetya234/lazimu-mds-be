@@ -24,8 +24,8 @@ public class KeteranganBerita {
     @Column(name = "sequence_number")
     private String sequenceNumber;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(fetch = FetchType.LAZY, cascade =  CascadeType.MERGE)
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.MERGE)
     @JoinColumn(name = "berita_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Berita berita;

@@ -16,33 +16,28 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-@Transactional
 public class BeritaImpl implements BeritaService{
 
-    @Autowired
     private BeritaRepository beritaRepository;
-
-    @Autowired
     private KeteranganBeritaRepository keteranganBeritaRepository;
+    private KategoriRepository kategoriRepository;
 
     @Autowired
-    private KategoriRepository kategoriRepository;
+    public BeritaImpl(BeritaRepository beritaRepository, KeteranganBeritaRepository keteranganBeritaRepository, KategoriRepository kategoriRepository) {
+        this.beritaRepository = beritaRepository;
+        this.keteranganBeritaRepository = keteranganBeritaRepository;
+        this.kategoriRepository = kategoriRepository;
+    }
 
     @Override
     public List<Berita> getAll() {
-        List<Berita> list = beritaRepository.findAll();
-        List<Berita> res = new ArrayList<>();
-        for (Berita b: list) {
-            b.setKeteranganBerita(keteranganBeritaRepository.findAllByBeritaOrderBySequenceNumberAsc(b));
-            res.add(b);
-        }
-        return res;
+        return beritaRepository.findAll();
     }
 
     @Override
     public Berita getById(String id) throws ResourceNotFoundExceotion {
         Berita berita = beritaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundExceotion("USER NOT FOUND"));
-        berita.setKeteranganBerita(keteranganBeritaRepository.findAllByBeritaOrderBySequenceNumberAsc(berita));
+//        berita.setKeteranganBerita(keteranganBeritaRepository.findAllByBeritaOrderBySequenceNumberAsc(berita));
         return berita;
     }
 
@@ -50,9 +45,16 @@ public class BeritaImpl implements BeritaService{
     public Berita create(Berita berita) throws ResourceNotFoundExceotion {
         var jj = kategoriRepository.findById(berita.getKategori()).orElseThrow(() -> new ResourceNotFoundExceotion("KATEGORI ID NOT FOUND"));
         berita.setKategoriId(jj);
-        return beritaRepository.save(berita);
-    }
+        Berita data = beritaRepository.save(berita);
+        List<KeteranganBerita> wadah = new ArrayList<>();
+//        for (KeteranganBerita k : berita.getKeteranganBerita()) {
+//            k.setBerita(data);
+//            wadah.add(k);
+//        }
+        keteranganBeritaRepository.saveAll(wadah);
 
+        return getById(data.getId());
+    }
     @Override
     public Map<String, Boolean> delete(String id) throws ResourceNotFoundExceotion {
         var MOSO23 = beritaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundExceotion("USER NOT FOUND"));
